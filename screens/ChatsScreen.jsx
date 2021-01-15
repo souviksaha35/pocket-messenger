@@ -14,7 +14,7 @@ function ChatsScreen() {
   }
   return (
     <View style={styles.container}>
-      <Appbar.Header style={{backgroundColor: Colors.red800}}>
+      <Appbar.Header style={{backgroundColor: Colors.red800}} statusBarHeight={20}>
         <Appbar.Action icon="menu" onPress={() => {}}/>
         <Appbar.Content title="Pocket-Messanger"/>
         <Appbar.Action icon="magnify" onPress={() => {}}/>
