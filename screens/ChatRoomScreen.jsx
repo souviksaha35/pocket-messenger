@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react'
-import { View, StyleSheet, ImageBackground, ScrollView, TextInput, Platform, KeyboardAvoidingView } from 'react-native'
+import { View, StyleSheet, ImageBackground, ScrollView, TextInput, TouchableNativeFeedback, Platform, KeyboardAvoidingView } from 'react-native'
 import {Appbar, Colors, Menu, Avatar} from 'react-native-paper';
 import {useNavigation} from "@react-navigation/native";
 import { Feather, FontAwesome5, Entypo } from '@expo/vector-icons';
 import {useRoute} from "@react-navigation/native";
 import {Input} from "react-native-elements"
-
+import * as ImagePicker from 'expo-image-picker';
 function ChatRoomScreen() {
 
   const route = useRoute();
@@ -18,7 +18,29 @@ function ChatRoomScreen() {
     console.log(user);
     setUser(user);
     console.log(User);
-  })
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      if (Platform.OS !== 'web') {
+        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== 'granted') {
+          alert('Sorry, we need camera roll permissions to make this work!');
+        }
+      }
+    })();
+  }, []);
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [8, 8],
+      quality: 1,
+    });
+
+    console.log(result);
+  }
 
   return (
     <KeyboardAvoidingView
@@ -56,7 +78,9 @@ function ChatRoomScreen() {
                 
                 multiline
                 />
-              <Entypo name="attachment" size={24} color="grey" style={styles.icons} />
+                <TouchableNativeFeedback onPress={pickImage} useForeground={true}>
+                  <Entypo name="attachment" size={24} color="grey" style={styles.icons} />
+                </TouchableNativeFeedback>
             </View>
           </View>
         
