@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { View, Text, StyleSheet, TouchableNativeFeedback,ScrollView, FlatList} from 'react-native';
 import {Appbar, Colors, Avatar} from 'react-native-paper';
-import User from '../data/User';
+import ChatRooms from '../data/ChatRooms';
 import ChatComponent from '../components/ChatComponent';
 
 
@@ -42,7 +42,7 @@ function ChatsScreen() {
         </View>
       </TouchableNativeFeedback> */}
         <FlatList
-        data={User}
+        data={ChatRooms}
         renderItem={({ item }) => <ChatComponent User={item}/>}
         keyExtractor={(item) => item.id}
         showsHorizontalScrollIndicator={false}

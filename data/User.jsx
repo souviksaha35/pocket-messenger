@@ -24,4 +24,29 @@ export default [{
   name: 'Vlad',
   imageUri: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png',
   unread: "5"
+}, {
+  id: 'u6',
+  name: 'Elon Musk',
+  imageUri: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png',
+  unread: "5"
+}, {
+  id: 'u7',
+  name: 'Adriana',
+  imageUri: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png',
+  unread: "5"
+}, {
+  id: 'u8',
+  name: 'Borja',
+  imageUri: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png',
+  unread: "5"
+}, {
+  id: 'u9',
+  name: 'Mom',
+  imageUri: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png',
+  unread: "5"
+}, {
+  id: 'u10',
+  name: 'Anjelina Jollie',
+  imageUri: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png',
+  unread: "5"
 }]

@@ -8,10 +8,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator} from "@react-navigation/stack";
 import ChatsScreen from "./screens/ChatsScreen";
 import ChatRoomScreen from './screens/ChatRoomScreen';
-import Amplify from 'aws-amplify'
+import Amplify from 'aws-amplify';
 import awsmobile from './aws-exports'
-
-
+import MediaUploadScreen from './screens/MediaUploadScreen'
+import FriendsProfileScreen from './screens/FriendsProfileScreen';
 const Stack = createStackNavigator();
 
 const firebaseConfig = {
@@ -38,6 +38,8 @@ export default function App() {
           <Stack.Navigator>
             <Stack.Screen component={ChatsScreen} name="ChatScreen" options={{headerShown: false}}/>
             <Stack.Screen component={ChatRoomScreen} name="ChatRoom" options={{headerShown: false}}/>
+            <Stack.Screen component={MediaUploadScreen} name="MediaUpload" options={{headerShown: false}}/>
+            <Stack.Screen component={FriendsProfileScreen} name="FriendsProfile" options={{headerShown: false}}/>
           </Stack.Navigator>
         </NavigationContainer>
       </PaperProvider>

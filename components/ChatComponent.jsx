@@ -10,14 +10,14 @@ function ChatComponent({ User }) {
   if (User) {
     return (
       <ScrollView>
-        <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate('ChatRoom', {user: User})}>
+        <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate('ChatRoom', {user: User.users[1]})}>
       
       <View style={styles.chatContainer}>
-        <Avatar.Image style={{margin: 15,}} size={50} source={{uri: User.imageUri}}/>
+        <Avatar.Image style={{margin: 15,}} size={50} source={{uri: User.users[1].imageUri}}/>
 
         <View style={{ height: '100%', width: '60%',}}>
           <Text style={{ margin: 20, fontSize: 16, fontWeight: 'bold' }}>
-            {User.name}
+            {User.users[1].name}
           </Text>
         </View>
 

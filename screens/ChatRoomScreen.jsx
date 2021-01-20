@@ -1,11 +1,14 @@
 import React, {useState, useEffect} from 'react'
-import { View, StyleSheet, ImageBackground, ScrollView, TextInput, TouchableNativeFeedback, Platform, KeyboardAvoidingView } from 'react-native'
+import { View, StyleSheet,Text, ImageBackground,FlatList, ScrollView, TextInput, TouchableNativeFeedback, Platform, KeyboardAvoidingView } from 'react-native'
 import {Appbar, Colors, Menu, Avatar} from 'react-native-paper';
 import {useNavigation} from "@react-navigation/native";
 import { Feather, FontAwesome5, Entypo } from '@expo/vector-icons';
 import {useRoute} from "@react-navigation/native";
 import {Input} from "react-native-elements"
 import * as ImagePicker from 'expo-image-picker';
+import Chats from '../data/Chats';
+import ChatMessage from '../components/ChatMessage';
+
 function ChatRoomScreen() {
 
   const route = useRoute();
@@ -39,7 +42,15 @@ function ChatRoomScreen() {
       quality: 1,
     });
 
+    if (result) {
+      navigation.navigate('MediaUpload', {media: result});
+    } else {
+      return;
+    }
+
     console.log(result);
+
+    
   }
 
   return (
@@ -50,7 +61,9 @@ function ChatRoomScreen() {
       <Appbar.Header style={{backgroundColor: Colors.red800, justifyContent: "space-between"}} statusBarHeight={20}>
         <Appbar.BackAction onPress={() => navigation.goBack()}/>
         <Avatar.Image source={{ uri: User.imageUri}} size={35}/>
-        <Appbar.Content title={User.name}/>
+        <Appbar.Content onPress={() => navigation.navigate('FriendsProfile', {user: User})} title={User.name}/>
+        
+        
         <Menu
           visible={menuVisible}
           onDismiss={() => setMenuVisible(false)}
@@ -67,11 +80,26 @@ function ChatRoomScreen() {
 
       <ImageBackground source={require('../assets/Background.jpeg')} style={{ width: '100%', height: '100%',}}>
         <View style={styles.messageContainer}>
+          {/* <FlatList
+          data={Chats}
+          renderItem={({ item }) => <ChatMessage Messages={item}/>}
+          keyExtractor={(item) => item.id}
+          inverted
+          /> */}
 
+<View style={{padding: 10,}}>
+      <View style={{backgroundColor: Colors.red400, padding: 10, marginRight: 50, borderRadius: 20,}}>
+        <Text style={{color: 'white', fontSize: 20,}}>
+          Hi
+        </Text>
+      </View>
+    </View>
         </View>
           <View style={styles.inputContainer}>
             <View style={styles.mainContainer}>
-              <FontAwesome5 name="laugh-beam" size={24} color="grey" />
+              <TouchableNativeFeedback onPress={() => navigation.navigate('MediaUpload')}>
+                <FontAwesome5 name="laugh-beam" size={24} color="grey" />
+              </TouchableNativeFeedback>
               <TextInput 
                 placeholder={"Type a message"}
                 style={styles.textInput}
