@@ -3,11 +3,13 @@ import { View, Text, StyleSheet, TouchableNativeFeedback,ScrollView, FlatList} f
 import {Appbar, Colors, Avatar} from 'react-native-paper';
 import ChatRooms from '../data/ChatRooms';
 import ChatComponent from '../components/ChatComponent';
-
+import {useNavigation, DrawerActions} from "@react-navigation/native"
 
 function ChatsScreen() {
 
   const [rippleOverflow, setRippleOverflow] = useState(false);
+
+  const navigation = useNavigation();
 
   const onPress = () => {
 
@@ -15,9 +17,9 @@ function ChatsScreen() {
   return (
     <View style={styles.container}>
       <Appbar.Header style={{backgroundColor: Colors.red800}} statusBarHeight={20}>
-        <Appbar.Action icon="menu" onPress={() => {}}/>
+        <Appbar.Action icon="menu" onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}/>
         <Appbar.Content title="Pocket-Messanger"/>
-        <Appbar.Action icon="magnify" onPress={() => {}}/>
+        <Appbar.Action icon="magnify" onPress={() => navigation.navigate('Search')}/>
       </Appbar.Header>
       {/* <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('#d6d6d6', rippleOverflow)}>
         <View style={styles.chatContainer}>

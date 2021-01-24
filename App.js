@@ -9,19 +9,26 @@ import {createStackNavigator} from "@react-navigation/stack";
 import ChatsScreen from "./screens/ChatsScreen";
 import ChatRoomScreen from './screens/ChatRoomScreen';
 import Amplify from 'aws-amplify';
-import awsmobile from './aws-exports'
-import MediaUploadScreen from './screens/MediaUploadScreen'
+import awsmobile from './aws-exports';
+import * as firebase from 'firebase';
+import DrawerContent from "./components/DrawerContent"
+import MediaUploadScreen from './screens/MediaUploadScreen';
+import {createDrawerNavigator} from "@react-navigation/drawer";
 import FriendsProfileScreen from './screens/FriendsProfileScreen';
-const Stack = createStackNavigator();
+import SearchScreen from './screens/SearchScreen';
 
+const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
+
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyBYDGdju7crAOkw3mi08raQoYW0Qwq3kOE",
-  authDomain: "pocket-messanger.firebaseapp.com",
-  projectId: "pocket-messanger",
-  storageBucket: "pocket-messanger.appspot.com",
-  messagingSenderId: "477621554688",
-  appId: "1:477621554688:web:1bea55a5128455d7c652e5",
-  measurementId: "G-FVK0VMJDEE"
+  apiKey: "AIzaSyAM2CvEr4FAlrZuPvWAxtbCXeZVUZjROrE",
+  authDomain: "pocket-messenger-32744.firebaseapp.com",
+  projectId: "pocket-messenger-32744",
+  storageBucket: "pocket-messenger-32744.appspot.com",
+  messagingSenderId: "842690037881",
+  appId: "1:842690037881:web:3d73d7c4ddfd3e70a3aca8",
+  measurementId: "G-J1J0DPV3D4"
 };
 
 
@@ -35,17 +42,26 @@ export default function App() {
     <SafeAreaProvider>
       <PaperProvider>
         <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen component={ChatsScreen} name="ChatScreen" options={{headerShown: false}}/>
+          <Stack.Navigator initialRouteName="Home">
             <Stack.Screen component={ChatRoomScreen} name="ChatRoom" options={{headerShown: false}}/>
             <Stack.Screen component={MediaUploadScreen} name="MediaUpload" options={{headerShown: false}}/>
             <Stack.Screen component={FriendsProfileScreen} name="FriendsProfile" options={{headerShown: false}}/>
+            <Stack.Screen component={DrawerNavigator} name="Home" options={{headerShown: false}}/>
+            <Stack.Screen component={SearchScreen} name="Search" options={{headerShown: false}}/>
           </Stack.Navigator>
         </NavigationContainer>
       </PaperProvider>
       <StatusBar/>
     </SafeAreaProvider>
   );
+}
+
+function DrawerNavigator() {
+  return (
+    <Drawer.Navigator drawerStyle={{ width: '85%' }} drawerContent={props => <DrawerContent {...props}/>}>
+      <Drawer.Screen name="Home" component={ChatsScreen}/>
+    </Drawer.Navigator>
+  )
 }
 
 const styles = StyleSheet.create({
