@@ -16,6 +16,10 @@ import MediaUploadScreen from './screens/MediaUploadScreen';
 import {createDrawerNavigator} from "@react-navigation/drawer";
 import FriendsProfileScreen from './screens/FriendsProfileScreen';
 import SearchScreen from './screens/SearchScreen';
+import NewMessageScreen from './screens/NewMessageScreen';
+import SignUpScreen from './screens/SignUpScreen';
+import LoginScreen from './screens/LoginScreen';
+
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -42,10 +46,13 @@ export default function App() {
     <SafeAreaProvider>
       <PaperProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Home">
+          <Stack.Navigator initialRouteName="SignUp">
             <Stack.Screen component={ChatRoomScreen} name="ChatRoom" options={{headerShown: false}}/>
             <Stack.Screen component={MediaUploadScreen} name="MediaUpload" options={{headerShown: false}}/>
             <Stack.Screen component={FriendsProfileScreen} name="FriendsProfile" options={{headerShown: false}}/>
+            <Stack.Screen component={NewMessageScreen} name="NewMessage" options={{headerShown: false}}/>
+            <Stack.Screen component={SignUpScreen} name="SignUp" options={{headerShown: false}}/>
+            <Stack.Screen component={LoginScreen} name="Login" options={{headerShown: false}}/>
             <Stack.Screen component={DrawerNavigator} name="Home" options={{headerShown: false}}/>
             <Stack.Screen component={SearchScreen} name="Search" options={{headerShown: false}}/>
           </Stack.Navigator>

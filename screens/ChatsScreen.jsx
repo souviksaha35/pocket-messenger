@@ -1,9 +1,12 @@
 import React, {useState} from 'react'
-import { View, Text, StyleSheet, TouchableNativeFeedback,ScrollView, FlatList} from 'react-native';
+import { View, Text, StyleSheet,TouchableOpacity, TouchableNativeFeedback,ScrollView, FlatList} from 'react-native';
 import {Appbar, Colors, Avatar} from 'react-native-paper';
 import ChatRooms from '../data/ChatRooms';
 import ChatComponent from '../components/ChatComponent';
 import {useNavigation, DrawerActions} from "@react-navigation/native"
+import {Button} from 'react-native-elements';
+import { MaterialIcons } from '@expo/vector-icons';
+
 
 function ChatsScreen() {
 
@@ -49,6 +52,17 @@ function ChatsScreen() {
         keyExtractor={(item) => item.id}
         showsHorizontalScrollIndicator={false}
         />
+
+        <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate('NewMessage')}>
+          <View style={{height: 60, width: 60, backgroundColor: Colors.red800, alignSelf:'flex-end', margin: 20, borderRadius: 30, alignItems: 'center', justifyContent: 'center'}}>
+            <MaterialIcons name="mode-edit" size={24} color="white" />
+          </View>
+        </TouchableOpacity>
+
+
+        {/* <Button onPress={() => navigation.navigate('NewMessage')}>
+          Press Me
+        </Button> */}
     </View>
   )
 }
