@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -19,20 +19,22 @@ import SearchScreen from './screens/SearchScreen';
 import NewMessageScreen from './screens/NewMessageScreen';
 import SignUpScreen from './screens/SignUpScreen';
 import LoginScreen from './screens/LoginScreen';
-
+import VerifyUserScreen from './screens/VerifyUserScreen';
+import {Auth} from 'aws-amplify';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAM2CvEr4FAlrZuPvWAxtbCXeZVUZjROrE",
-  authDomain: "pocket-messenger-32744.firebaseapp.com",
-  projectId: "pocket-messenger-32744",
-  storageBucket: "pocket-messenger-32744.appspot.com",
-  messagingSenderId: "842690037881",
-  appId: "1:842690037881:web:3d73d7c4ddfd3e70a3aca8",
-  measurementId: "G-J1J0DPV3D4"
+  apiKey: "AIzaSyCuNohHFtO57B3TVfGug6VDFA4nfLHUnNM",
+  authDomain: "pocket-messenger-ac96f.firebaseapp.com",
+  projectId: "pocket-messenger-ac96f",
+  storageBucket: "pocket-messenger-ac96f.appspot.com",
+  messagingSenderId: "950808111690",
+  appId: "1:950808111690:web:c7b1f9ebbdf3b7d6b8d4b3",
+  measurementId: "G-NWSZHB4FVS"
 };
 
 
@@ -40,19 +42,34 @@ export default function App() {
   useEffect(() => {
     const amplify = Amplify.configure(awsmobile);
 
+    const authCheck = async () => {
+      const currentuser = await Auth.currentAuthenticatedUser({ bypassCache: true });
+      console.log(currentuser);
+      setUser(currentuser.attributes);
+      console.log('user', user);
+    }
+
+    authCheck();
+    
+    // const firebaseApp = firebase.initializeApp(firebaseConfig);
+    
+    // console.log(firebaseApp);
+
     // For Firebase JS SDK v7.20.0 and later, measurementId is optiona
   }, []);
-  return (
-    <SafeAreaProvider>
+
+  const [user, setUser] = useState('');
+
+  if (user.sub) {
+    return (
+      <SafeAreaProvider>
       <PaperProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="SignUp">
+          <Stack.Navigator initialRouteName="Home">
             <Stack.Screen component={ChatRoomScreen} name="ChatRoom" options={{headerShown: false}}/>
             <Stack.Screen component={MediaUploadScreen} name="MediaUpload" options={{headerShown: false}}/>
             <Stack.Screen component={FriendsProfileScreen} name="FriendsProfile" options={{headerShown: false}}/>
             <Stack.Screen component={NewMessageScreen} name="NewMessage" options={{headerShown: false}}/>
-            <Stack.Screen component={SignUpScreen} name="SignUp" options={{headerShown: false}}/>
-            <Stack.Screen component={LoginScreen} name="Login" options={{headerShown: false}}/>
             <Stack.Screen component={DrawerNavigator} name="Home" options={{headerShown: false}}/>
             <Stack.Screen component={SearchScreen} name="Search" options={{headerShown: false}}/>
           </Stack.Navigator>
@@ -60,7 +77,23 @@ export default function App() {
       </PaperProvider>
       <StatusBar/>
     </SafeAreaProvider>
-  );
+    )
+  } else {
+    return (
+      <SafeAreaProvider>
+      <PaperProvider>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="SignUp">
+            <Stack.Screen component={SignUpScreen} name="SignUp" options={{headerShown: false}}/>
+            <Stack.Screen component={VerifyUserScreen} name="VerifySignup" options={{headerShown: false}}/>
+            <Stack.Screen component={LoginScreen} name="Login" options={{headerShown: false}}/>
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PaperProvider>
+      <StatusBar/>
+    </SafeAreaProvider>
+    )
+  }
 }
 
 function DrawerNavigator() {

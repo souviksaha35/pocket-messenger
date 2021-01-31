@@ -112,7 +112,7 @@ export const getUser = /* GraphQL */ `
       name
       email
       profilePic
-      password
+      username
       activated
       phone
       createdAt
@@ -132,7 +132,7 @@ export const listUsers = /* GraphQL */ `
         name
         email
         profilePic
-        password
+        username
         activated
         phone
         createdAt

@@ -5,10 +5,23 @@ import {
   DrawerItem,
   DrawerItemList
 } from '@react-navigation/drawer';
+import {useNavigation} from "@react-navigation/native"
 import {Colors} from 'react-native-paper';
-import { MaterialIcons, Entypo, MaterialCommunityIcons, Feather } from '@expo/vector-icons';
+import { MaterialIcons,AntDesign, Entypo, MaterialCommunityIcons, Feather } from '@expo/vector-icons';
+import { Auth } from 'aws-amplify';
+
 
 function DrawerContent(props) {
+  const navigation = useNavigation();
+  const signout = async () => {
+    try {
+      await Auth.signOut();
+      navigation.navigate('Login');
+    } catch (error) {
+      console.log('error signing out: ', error);
+      alert(error);
+    }
+  }
   return (
     <View style={styles.container}>
       
@@ -89,6 +102,14 @@ function DrawerContent(props) {
               <Feather name="settings" style={{marginLeft: 20, marginRight: 20,}} size={24} color="grey" />
               <Text style={{fontWeight: 'bold', fontSize: 15, color: 'black'}}>
                 Settings
+              </Text>
+            </View>
+          </TouchableNativeFeedback>
+          <TouchableNativeFeedback onPress={signout}>
+            <View style={{marginTop: 5, height: '10%', width: '100%', flexDirection: 'row', alignItems: 'center',}}>
+              <AntDesign name="logout" style={{marginLeft: 20, marginRight: 20,}} size={24} color="grey" />
+              <Text style={{fontWeight: 'bold', fontSize: 15, color: 'black'}}>
+                Logout
               </Text>
             </View>
           </TouchableNativeFeedback>

@@ -191,7 +191,7 @@ export const createUser = /* GraphQL */ `
       name
       email
       profilePic
-      password
+      username
       activated
       phone
       createdAt
@@ -209,7 +209,7 @@ export const updateUser = /* GraphQL */ `
       name
       email
       profilePic
-      password
+      username
       activated
       phone
       createdAt
@@ -227,7 +227,7 @@ export const deleteUser = /* GraphQL */ `
       name
       email
       profilePic
-      password
+      username
       activated
       phone
       createdAt

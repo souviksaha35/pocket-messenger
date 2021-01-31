@@ -10,6 +10,11 @@
       "StackName": "amplify-pocketmessenger-dev-14516",
       "StackId": "arn:aws:cloudformation:ap-south-1:719486586568:stack/amplify-pocketmessenger-dev-14516/66ee1470-576e-11eb-a963-0a46b14f170e",
       "AmplifyAppId": "dcgi0krbvqp05"
+    },
+    "categories": {
+      "auth": {
+        "pocketmessenger265f7c6a": {}
+      }
     }
   }
 }

@@ -16,5 +16,13 @@
         }
       }
     }
+  },
+  "auth": {
+    "pocketmessenger265f7c6a": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
   }
 }
