@@ -60,40 +60,34 @@ export default function App() {
 
   const [user, setUser] = useState('');
 
-  if (user.sub) {
+
     return (
       <SafeAreaProvider>
       <PaperProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Home">
-            <Stack.Screen component={ChatRoomScreen} name="ChatRoom" options={{headerShown: false}}/>
-            <Stack.Screen component={MediaUploadScreen} name="MediaUpload" options={{headerShown: false}}/>
-            <Stack.Screen component={FriendsProfileScreen} name="FriendsProfile" options={{headerShown: false}}/>
-            <Stack.Screen component={NewMessageScreen} name="NewMessage" options={{headerShown: false}}/>
-            <Stack.Screen component={DrawerNavigator} name="Home" options={{headerShown: false}}/>
-            <Stack.Screen component={SearchScreen} name="Search" options={{headerShown: false}}/>
+          <Stack.Navigator>
+            {user.sub !== null ? (
+              <>
+              <Stack.Screen component={DrawerNavigator} name="Home" options={{headerShown: false}}/>
+              <Stack.Screen component={ChatRoomScreen} name="ChatRoom" options={{headerShown: false}}/>
+              <Stack.Screen component={MediaUploadScreen} name="MediaUpload" options={{headerShown: false}}/>
+              <Stack.Screen component={FriendsProfileScreen} name="FriendsProfile" options={{headerShown: false}}/>
+              <Stack.Screen component={NewMessageScreen} name="NewMessage" options={{headerShown: false}}/>
+              <Stack.Screen component={SearchScreen} name="Search" options={{headerShown: false}}/>
+              </>
+            ): (
+              <>
+              <Stack.Screen component={LoginScreen} name="Login" options={{headerShown: false}}/>
+              <Stack.Screen component={SignUpScreen} name="SignUp" options={{headerShown: false}}/>
+              <Stack.Screen component={VerifyUserScreen} name="VerifySignup" options={{headerShown: false}}/>
+              </>
+            )}
           </Stack.Navigator>
         </NavigationContainer>
       </PaperProvider>
       <StatusBar/>
     </SafeAreaProvider>
-    )
-  } else {
-    return (
-      <SafeAreaProvider>
-      <PaperProvider>
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName="SignUp">
-            <Stack.Screen component={SignUpScreen} name="SignUp" options={{headerShown: false}}/>
-            <Stack.Screen component={VerifyUserScreen} name="VerifySignup" options={{headerShown: false}}/>
-            <Stack.Screen component={LoginScreen} name="Login" options={{headerShown: false}}/>
-          </Stack.Navigator>
-        </NavigationContainer>
-      </PaperProvider>
-      <StatusBar/>
-    </SafeAreaProvider>
-    )
-  }
+  )
 }
 
 function DrawerNavigator() {
