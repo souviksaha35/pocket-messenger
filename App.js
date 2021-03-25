@@ -123,7 +123,7 @@ export default function App() {
       <PaperProvider>
         <NavigationContainer>
           <Stack.Navigator>
-            {/* {user.sub ? (
+            {user.sub ? (
               <>
               <Stack.Screen component={DrawerNavigator} name="Home" options={{headerShown: false}}/>
               <Stack.Screen component={ChatRoomScreen} name="ChatRoom" options={{headerShown: false}}/>
@@ -143,9 +143,9 @@ export default function App() {
               <Stack.Screen component={ForgotPassword} name="Forgot-Password" options={{headerShown: false}}/>
               <Stack.Screen component={VerifyUserScreen} name="VerifySignup" options={{headerShown: false}}/>
               </>
-            )} */}
+            )}
 
-            <Stack.Screen name="Upi" component={UpiScreen} options={{headerShown: false}}/>
+            {/* <Stack.Screen name="Upi" component={UpiScreen} options={{headerShown: false}}/> */}
           </Stack.Navigator>
         </NavigationContainer>
       </PaperProvider>
