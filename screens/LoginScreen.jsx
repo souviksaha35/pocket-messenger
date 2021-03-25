@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {View, StyleSheet, Text} from 'react-native';
-import {Colors, TextInput, Button, Modal} from 'react-native-paper';
+import {TextInput, Button, Modal, Colors} from 'react-native-paper';
 import { Entypo } from '@expo/vector-icons';
 import Amplify, { API, graphqlOperation } from 'aws-amplify';
 import {createUser} from '../graphql/mutations';
@@ -17,43 +17,37 @@ function LoginScreen() {
   
 
   const signin = async () => {
-    try {
       const userInfo = await Auth.signIn(username, password);
-      console.log(userInfo);
-
       if (userInfo) {
-        const userData = await API.graphql(graphqlOperation(getUser.anchor, {id: userInfo.attributes.sub}));
-
-        console.log(userData);
-
-        if (userData.data.getUser) {
-          console.log("User is already registered in database");
-          return;
-        }
-
-        const newUser = {
-          id: userInfo.attributes.sub,
-          activated: userInfo.attributes.email_verified,
-          email: userInfo.attributes.email,
-          username: userInfo.username,
-        }
-
-        console.log(newUser);
-
-        const newuser = await API.graphql(
-          graphqlOperation(
-            createUser,
-            { input: newuser }
-          )
-        )
-
-        console.log(newUser);
         navigation.navigate('Home');
       }
-    } catch (error) {
-      console.log('error signing in', error);
-      alert(error.message);
-    }
+
+      // if (userInfo) {
+      //   const userData = await API.graphql(graphqlOperation(getUser, {id: userInfo.attributes.sub}));
+
+      //   console.log(userData);
+
+      //   if (userData.data.getUser) {
+      //     console.log("User is already registered in database");
+      //     navigation.navigate('Home');
+      //     return;
+      //   }
+
+      //   const User = {
+      //     id: userInfo.attributes.sub,
+      //     activated: userInfo.attributes.email_verified,
+      //     email: userInfo.attributes.email,
+      //     username: userInfo.username,
+      //   }
+
+      //   console.log(newUser);
+
+      //   const newuser = await API.graphql({ query: createUser, variables: {input: User}});
+
+      //   console.log(newUser);
+      //   console.log(newuser);
+      //   navigation.navigate('Home');
+      // }
   }
 
   return (
@@ -90,6 +84,14 @@ function LoginScreen() {
         Sign in 
       </Button>
 
+      </View>
+      <View style={{width: '100%', height: '30%', flexDirection: 'column', alignItems: 'center',}}>
+        <Button mode="contained" style={{margin: 50, borderRadius: 10, width: '50%', height: '18%', backgroundColor: Colors.amber300}} onPress={() => {navigation.navigate('SignUp')}}>
+          Create Account
+        </Button>
+        <Button mode="contained" style={{ borderRadius: 10, width: '50%', height: '18%'}} onPress={() => navigation.navigate('Forgot-Password')}>
+          Forgot Password
+        </Button>
       </View>
     </View>
   )

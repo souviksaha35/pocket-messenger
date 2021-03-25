@@ -7,19 +7,42 @@ import {createUser} from '../graphql/mutations';
 import {useNavigation} from '@react-navigation/native'
 import * as firebase from 'firebase';
 import { Auth } from 'aws-amplify';
-
+import {gql, useMutation} from '@apollo/client'
 
 function SignUpScreen() {
 
   const navigation = useNavigation();
 
+  // const SIGNUP_MUTATION = gql`
+  //   mutation SignupMutation(
+  //     $email: String!
+  //     $password: String!
+  //     $phone: String!) {
+  //       signup(
+  //         email: $email,
+  //         password: $password,
+  //         phone: $phone
+  //       ) {
+  //         user
+  //       }
+  //     }
+  // `;
+
+  // const [signup] = useMutation(SIGNUP_MUTATION, {
+  //   variables: {
+  //     email: email,
+  //     password: password,
+  //     phone: phone
+  //   }
+  // })
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [phone, setPhone] = useState('');
   const [buttondisable, setButtonDisable] = useState(false);
   const [inputDisabled, setInputDisabled] = useState(false);
   const [username, setUsername] = useState('');
+  const [phone, setPhone] = useState('');
 
 
   const signup = async () => {
@@ -45,6 +68,26 @@ function SignUpScreen() {
       console.log(e);
       alert(e);
     }
+
+    // try {
+    //   const signup = useMutation(SIGNUP_MUTATION, {
+    //     variables: {
+    //       email: email,
+    //       password: password,
+    //       phone: phone
+    //     }
+    //   })
+
+    //   console.log(signup);
+    //   navigation.navigate('Login');
+    //   setButtonDisable(false);
+    //   setInputDisabled(false);
+    // } catch (e) {
+    //   console.log(e);
+    //   alert(e);
+    //   setButtonDisable(false);
+    //   setInputDisabled(false);
+    // }
   }
 
   return (
@@ -53,18 +96,7 @@ function SignUpScreen() {
         <Entypo name="chat" size={120} color={Colors.amber300} />
       </View>
       <View style={{width: '100%', height: '40%', justifyContent: 'space-between'}}>
-      <TextInput
-      label="Username"
-      placeholder="Username"
-      dense={true}
-      autoCompleteType="username"
-      value={username}
-      mode='outlined'
-      style={{margin: 20,}}
-      keyboardType="default"
-      disabled={inputDisabled}
-      onChange={(event) => setUsername(event.nativeEvent.text)}
-      />
+
       <TextInput
       label="Email"
       placeholder="Example@Example.com"
@@ -90,6 +122,19 @@ function SignUpScreen() {
       keyboardType="default"
       disabled={inputDisabled}
       onChange={(event) => setPassword(event.nativeEvent.text)}
+      />
+
+      <TextInput
+      label="Mobile No."
+      placeholder="91-------"
+      dense={true}
+      autoCompleteType="tel"
+      value={phone}
+      mode='outlined'
+      style={{margin: 20,}}
+      keyboardType="number-pad"
+      disabled={inputDisabled}
+      onChange={(event) => setPhone(event.nativeEvent.text)}
       />
 
       <Button mode="contained" disabled={buttondisable} style={{margin: 20, borderRadius: 10,}} onPress={signup}>
